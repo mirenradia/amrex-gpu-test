@@ -1,0 +1,30 @@
+# Build files
+tmp_build_dir/
+d/
+f/
+o/
+t/
+*.ex
+*.dSYM
+*.[oa]
+TAGS
+ipo_out.optrpt
+
+# editors
+.vscode
+.*.sw[n-p]
+
+# Example output
+chk*/
+plt*/
+Backtrace.*
+*.out
+*.dat
+
+# Job schedulers
+jobscript*
+*.pbs
+
+
+# other
+*.s
