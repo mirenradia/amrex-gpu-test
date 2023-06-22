@@ -1,6 +1,9 @@
 #include "AMReX.H"
 #include "AMReX_FArrayBox.H"
 
+#include <iomanip>
+#include <limits>
+
 int main()
 {
     bool return_val = 0;
@@ -32,9 +35,11 @@ int main()
 
         double max_error = error_fab.max();
 
-        amrex::Print() << "max error = " << max_error << std::endl;
+        amrex::Print() << std::setprecision(
+                              std::numeric_limits<double>::digits10 + 1)
+                       << "max error = " << max_error << std::endl;
 
-        if (max_error > 1e-14)
+        if (max_error > std::numeric_limits<double>::epsilon() * 10)
         {
             amrex::Print() << "Test failed" << std::endl;
             return_val = 1;
