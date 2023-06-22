@@ -33,7 +33,7 @@ int main()
                                           array(i, j, k, 0));
                          });
 
-        double max_error = error_fab.max();
+        double max_error = error_fab.max<amrex::RunOn::Host>();
 
         amrex::Print() << std::setprecision(
                               std::numeric_limits<double>::digits10 + 1)
