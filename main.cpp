@@ -1,5 +1,6 @@
 #include "AMReX.H"
 #include "AMReX_FArrayBox.H"
+#include "AMReX_ParmParse.H"
 
 #include <iomanip>
 #include <limits>
@@ -7,7 +8,19 @@
 int main()
 {
     bool return_val = 0;
-    amrex::Initialize(MPI_COMM_WORLD);
+    bool use_parm_parse = false;
+    int argc = 0;
+    char** argv = nullptr;
+    amrex::Initialize(argc, argv, use_parm_parse, MPI_COMM_WORLD,
+                      []()
+                      {
+                          amrex::ParmParse pp("amrex");
+                          int handle_sigsegv = 0;
+                          // disable amrex SIGSEGV handling
+                          pp.queryAdd("handle_sigsegv",
+                                      handle_sigsegv);
+                      });
+
     {
         constexpr int n_grid = 8;
         amrex::Box box(amrex::IntVect(0, 0, 0),
