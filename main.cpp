@@ -1,5 +1,6 @@
 #include "AMReX.H"
 #include "AMReX_FArrayBox.H"
+#include "AMReX_ParmParse.H"
 
 #include <iomanip>
 #include <limits>
@@ -9,6 +10,10 @@ int main()
     bool return_val = 0;
     amrex::Initialize(MPI_COMM_WORLD);
     {
+        amrex::ParmParse pp{"amrex"};
+        bool the_arena_is_managed = false;
+        pp.queryAdd("the_arena_is_managed", the_arena_is_managed);
+
         constexpr int n_grid = 8;
         amrex::Box box(amrex::IntVect(0, 0, 0),
                        amrex::IntVect(n_grid - 1, n_grid - 1, n_grid - 1));
