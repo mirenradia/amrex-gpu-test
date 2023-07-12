@@ -9,15 +9,7 @@ int main(int argc, char **argv)
 {
     bool return_val     = 0;
     bool use_parm_parse = true;
-    amrex::Initialize(argc, argv, use_parm_parse, MPI_COMM_WORLD,
-                      []()
-                      {
-                          amrex::ParmParse pp("amrex");
-                          int handle_sigsegv = 0;
-                          // disable amrex SIGSEGV handling
-                          pp.queryAdd("handle_sigsegv", handle_sigsegv);
-                      });
-
+    amrex::Initialize(argc, argv, use_parm_parse, MPI_COMM_WORLD);
     {
         constexpr int n_grid = 8;
         amrex::Box box(amrex::IntVect(0, 0, 0),
