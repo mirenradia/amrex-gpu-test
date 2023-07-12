@@ -11,6 +11,12 @@ int main(int argc, char **argv)
     bool use_parm_parse = true;
     amrex::Initialize(argc, argv, use_parm_parse, MPI_COMM_WORLD);
     {
+#ifdef AMREX_USE_GPU
+        amrex::Print() << "GPU Name: " << amrex::Gpu::Device::deviceName()
+                       << "\n"
+                       << "GPU Vendor: " << amrex::Gpu::Device::deviceVendor()
+                       << std::endl;
+#endif
         constexpr int n_grid = 8;
         amrex::Box box(amrex::IntVect(0, 0, 0),
                        amrex::IntVect(n_grid - 1, n_grid - 1, n_grid - 1));
