@@ -1,3 +1,6 @@
 [submodule "amrex"]
 	path = amrex
 	url = ../../AMReX-Codes/amrex.git
+[submodule "Catch2"]
+	path = Catch2
+	url = ../../catchorg/Catch2
