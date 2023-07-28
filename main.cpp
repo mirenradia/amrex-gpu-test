@@ -5,11 +5,11 @@
 #include <iomanip>
 #include <limits>
 
-int main(int argc, char **argv)
+#include <catch_amalgamated.hpp>
+
+TEST_CASE("amrex gpu")
 {
-    bool return_val     = 0;
-    bool use_parm_parse = true;
-    amrex::Initialize(argc, argv, use_parm_parse, MPI_COMM_WORLD);
+    amrex::Initialize(MPI_COMM_WORLD);
     {
 #ifdef AMREX_USE_GPU
         amrex::Print() << "GPU Name: " << amrex::Gpu::Device::deviceName()
@@ -47,16 +47,9 @@ int main(int argc, char **argv)
                               std::numeric_limits<double>::digits10 + 1)
                        << "max error = " << max_error << std::endl;
 
-        if (max_error > std::numeric_limits<double>::epsilon() * 10)
-        {
-            amrex::Print() << "Test failed" << std::endl;
-            return_val = 1;
-        }
-        else
-        {
-            amrex::Print() << "Test passed" << std::endl;
-        }
+        CHECK_THAT(max_error,
+                   Catch::Matchers::WithinAbs(
+                       0.0, std::numeric_limits<double>::epsilon() * 10));
     }
     amrex::Finalize();
-    return return_val;
 }

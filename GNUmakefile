@@ -33,6 +33,15 @@ include $(AMREX_HOME)/Src/Boundary/Make.package
 include $(AMREX_HOME)/Src/AmrCore/Make.package
 include $(AMREX_HOME)/Src/Amr/Make.package
 
+catch2_dir := $(realpath ./Catch2/extras)
+catch2_sources := catch_amalgamated.cpp
+catch2_headers := catch_amalgamated.hpp
+
+CEXE_sources += $(catch2_sources)
+CEXE_headers += $(catch2_headers)
+
+VPATH_LOCATIONS += $(catch2_dir)
 INCLUDE_LOCATIONS += $(realpath .)
+SYSTEM_INCLUDE_LOCATIONS += $(catch2_dir)
 
 include $(AMREX_HOME)/Tools/GNUMake/Make.rules
