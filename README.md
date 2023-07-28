@@ -9,9 +9,10 @@ AMReX provides extensive documentation which can be found
 [here](https://amrex-codes.github.io/amrex/docs_html/).
 
 
-## AMReX git submodule
+## git submodules
 
-Note that the AMReX repository is included as a [git
+Note that the AMReX repository and [Catch2](https://github.com/catchorg/Catch2) 
+is included as a [git
 submodule](https://git-scm.com/book/en/v2/Git-Tools-Submodules) so to clone this
 repository, it is easiest to pass the `--recurse-submodules` flag e.g.
 
